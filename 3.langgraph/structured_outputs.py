@@ -33,11 +33,11 @@ Joke = {
     "required": ["rate", "punchline"],
 }
 
-# llm_with_structure = llm.with_structured_output(Joke)
-# structured_output = llm_with_structure.invoke("给我一个笑话，要好笑的")
-# print(structured_output)
-# print(type(structured_output))
-
 llm_with_structure = llm.with_structured_output(Joke)
-for chunk in llm_with_structure.stream("给我一个笑话，要好笑的"):
-    print(chunk)
+structured_output = llm_with_structure.invoke("给我一个笑话，要好笑的")
+print(structured_output)
+print(type(structured_output))
+
+# llm_with_structure = llm.with_structured_output(Joke)
+# for chunk in llm_with_structure.stream("给我一个笑话，要好笑的"):
+#     print(chunk)
