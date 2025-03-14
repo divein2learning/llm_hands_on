@@ -5,15 +5,17 @@
 # 可以通过python函数，pydantic Model，TypedDict类或者Langchain的Tool对象传递工具
 # 文档字符串和类型提示很重要
 from langchain_core.messages import HumanMessage, SystemMessage
-from typing_extensions import Annotated, TypedDict
-from model_init import initialize
 from langchain_core.tools import tool
+from model_init import initialize
+
 llm = initialize()
+
 
 @tool
 def add(a: int, b: int) -> int:
     """执行加法算术，接受两个整数a和b，返回整数a+b"""
     return a + b
+
 
 # ========================================================================================
 # tools = [add]
@@ -44,7 +46,12 @@ def add(a: int, b: int) -> int:
 # ========================================================================================
 tools = [add]
 llm_with_tools = llm.bind_tools(tools)
-messages = [SystemMessage("你是一个会调用工具来解决计算问题的AI，能调用工具的时候请不要自己臆想，请确保答案的准确性。"), HumanMessage("20001203加12029245等于多少")]
+messages = [
+    SystemMessage(
+        "你是一个会调用工具来解决计算问题的AI，能调用工具的时候请不要自己臆想，请确保答案的准确性。"
+    ),
+    HumanMessage("20001203加12029245等于多少"),
+]
 ai_msg = llm_with_tools.invoke(messages)
 # print(ai_msg.tool_calls)
 messages.append(ai_msg)

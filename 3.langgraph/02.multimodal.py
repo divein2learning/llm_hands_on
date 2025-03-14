@@ -1,5 +1,6 @@
-from model_init import initialize_4v
 from langchain_core.messages import HumanMessage
+from model_init import initialize_4v
+
 llm = initialize_4v()
 
 

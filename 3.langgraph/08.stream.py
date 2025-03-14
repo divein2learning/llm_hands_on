@@ -1,7 +1,9 @@
-from model_init import initialize
-from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
-from langchain_core.prompts import ChatPromptTemplate
 import asyncio
+
+from langchain_core.output_parsers import JsonOutputParser
+from langchain_core.prompts import ChatPromptTemplate
+from model_init import initialize
+
 llm = initialize()
 
 # =========================================================================================================
@@ -27,15 +29,15 @@ llm = initialize()
 # =========================================================================================================
 
 # =========================================================================================================
-# # 流式json
-# prompt = ChatPromptTemplate.from_template("写一副关于{topic}的对联，结果展示成一个json，json的key分别是上联下联和横批，key不要是中文。")
-# parser = JsonOutputParser()
-# chain = prompt | llm | parser
+# 流式json
+prompt = ChatPromptTemplate.from_template("写一副关于{topic}的对联，结果展示成一个json，json的key分别是上联下联和横批，key不要是中文。")
+parser = JsonOutputParser()
+chain = prompt | llm | parser
 
-# async def async_json_stream():
-#     async for chunk in chain.astream({"topic": "铜合金"}):
-#         print(chunk, flush=True)
-# asyncio.run(async_json_stream())
+async def async_json_stream():
+    async for chunk in chain.astream({"topic": "铜合金"}):
+        print(chunk, flush=True)
+asyncio.run(async_json_stream())
 # =========================================================================================================
 
 
@@ -60,7 +62,7 @@ llm = initialize()
 #         if not isinstance(transversals, list):
 #             continue
 #         yield transversals
-            
+
 # chain = prompt | llm | parser | _extract_transversal_streaming
 
 # async def async_extract_stream():
@@ -80,9 +82,11 @@ llm = initialize()
 # =========================================================================================================
 
 # =========================================================================================================
-prompt = ChatPromptTemplate.from_template("写一副关于{topic}的对联，结果展示成一个json，json的key分别是上联下联和横批，key不要是中文。")
-parser = JsonOutputParser()
-chain = prompt | llm | parser
+# prompt = ChatPromptTemplate.from_template(
+#     "写一副关于{topic}的对联，结果展示成一个json，json的key分别是上联下联和横批，key不要是中文。"
+# )
+# parser = JsonOutputParser()
+# chain = prompt | llm | parser
 
 # =============================
 # async def async_json_stream_event():
@@ -93,22 +97,25 @@ chain = prompt | llm | parser
 # asyncio.run(async_json_stream_event())
 # =============================
 
+
 # =============================
-async def parse_chain_event():
-    num_events = 0
-    async for event in chain.astream_events({"topic": "铜合金"}):
-        kind = event["event"]
-        if kind == "on_chat_model_stream":
-            print(
-                f"Chat model chunk: {repr(event['data']['chunk'].content)}",
-                flush=True,
-            )
-        if kind == "on_parser_stream":
-            print(f"Parser chunk: {event['data']['chunk']}", flush=True)
-        num_events += 1
-        if num_events > 30:
-            # Truncate the output
-            print("...")
-            break
-asyncio.run(parse_chain_event())
+# async def parse_chain_event():
+#     num_events = 0
+#     async for event in chain.astream_events({"topic": "铜合金"}):
+#         kind = event["event"]
+#         if kind == "on_chat_model_stream":
+#             print(
+#                 f"Chat model chunk: {repr(event['data']['chunk'].content)}",
+#                 flush=True,
+#             )
+#         if kind == "on_parser_stream":
+#             print(f"Parser chunk: {event['data']['chunk']}", flush=True)
+#         num_events += 1
+#         if num_events > 30:
+#             # Truncate the output
+#             print("...")
+#             break
+
+
+# asyncio.run(parse_chain_event())
 # =========================================================================================================

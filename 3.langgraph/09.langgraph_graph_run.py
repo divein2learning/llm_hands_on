@@ -1,17 +1,18 @@
-from typing_extensions import Annotated, TypedDict
-from langgraph.graph import StateGraph, START, END
-from langgraph.graph.message import add_messages
 from langchain_community.tools import DuckDuckGoSearchRun
+from langgraph.graph import StateGraph
+from langgraph.graph.message import add_messages
 from langgraph.prebuilt import ToolNode, tools_condition
 from model_init import initialize
+from typing_extensions import Annotated, TypedDict
+
 llm = initialize()
+
 
 class State(TypedDict):
     # Messages have the type "list". The `add_messages` function
     # in the annotation defines how this state key should be updated
     # (in this case, it appends messages to the list, rather than overwriting them)
     messages: Annotated[list, ..., add_messages]
-
 
 
 graph_builder = StateGraph(State)
@@ -45,6 +46,7 @@ def stream_graph_updates(user_input: str):
         for value in event.values():
             # print(value)
             print("Assistant:", value["messages"][-1].content)
+
 
 while True:
     try:
