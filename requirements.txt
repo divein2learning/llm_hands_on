@@ -1,0 +1,10 @@
+transformers
+modelscope
+FlagEmbedding
+pdfminer
+pydantic
+langchain
+langchain_community
+langgraph
+faiss-cpu
+python-dotenv

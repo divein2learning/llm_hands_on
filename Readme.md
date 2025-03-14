@@ -1,6 +1,9 @@
 # 记录langchain学习所用的code
 个人学习所用，代码多来自官网示例，会持续更新（LangChain和LangGraph的代码都合并在`3.langgraph`里
 
+# start
+安装requirements.txt里的依赖，除了`1.rag`里使用了0.5b大小的Qwen，其他都是使用的免费的GLM的flash系列，运行代码前复制`3.langgraph/.env.example`到`3.langgraph/.env`复制后替换自己的`ZHIPUAI_API_KEY`，api key从[这里](https://www.bigmodel.cn/usercenter/proj-mgmt/apikeys)获取。
+
 # TODOs:
 - [x] LangChain核心内容
 - [ ] 添加LangChain主要数据结构用法(Runnable)

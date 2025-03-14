@@ -1,9 +1,7 @@
 from langgraph.prebuilt import create_react_agent
-from langchain_ollama import ChatOllama
 from langchain_community.chat_models import ChatZhipuAI
 from langchain_core.tools import tool
 from langchain_community.tools import DuckDuckGoSearchRun
-import os
 from dotenv import load_dotenv
 
 load_dotenv()
