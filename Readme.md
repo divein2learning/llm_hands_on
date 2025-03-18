@@ -28,3 +28,4 @@
 |[`3.langgraph/09.langgraph_graph.ipynb`](3.langgraph/09.langgraph_graph.ipynb)|langgraph的基本对话Graph构建流程，以及如何在graph中加入tool调用|
 |[`3.langgraph/09.langgraph_graph_run.py`](3.langgraph/09.langgraph_graph_run.py)|langgraph的基本对话Graph，带tool调用|
 |[`3.langgraph/10.memory_langgraph.ipynb`](3.langgraph/10.memory_langgraph.ipynb)|带有Memory的Graph，带tool调用|
+|[`4.langgraph-academy`](4.langgraph-academy/4.0.1.basics.ipynb)|LangGraph官方教程|
